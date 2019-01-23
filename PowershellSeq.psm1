@@ -17,3 +17,4 @@ Foreach($import in @($Public + $Private))
 
 Export-ModuleMember -Function Send-SeqEvent
 Export-ModuleMember -Function Open-Seq
+Export-ModuleMember -Function Send-SeqMessage

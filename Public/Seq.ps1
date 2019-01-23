@@ -52,3 +52,24 @@ function Send-SeqEvent (
 
     Invoke-RestMethod -Uri $target -Body $body -ContentType "application/json" -Method POST
 }
+
+function Send-SeqMessage
+{
+    param (
+        [string]$uri,
+        [string]$apiKey,
+        [string]$message,
+        [hashtable]$properties = @{},
+        [string]$level = "Verbose"
+    )
+
+    try
+    {
+        $seq = Open-Seq -url $uri -apiKey $apiKey -properties $properties
+        Send-SeqEvent $seq $message -level $level
+    }
+    catch
+    {
+        Write-Host "Failed to send motification to Seq: $_"
+    }
+}
